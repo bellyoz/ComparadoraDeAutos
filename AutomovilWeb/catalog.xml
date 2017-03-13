@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/AutomovilSoapWS/AutomovilWS?WSDL" uri="src/conf/xml-resources/web-service-references/AutomovilWS/wsdl/localhost_8080/AutomovilSoapWS/AutomovilWS.wsdl"/>
+    <system systemId="http://localhost:8080/AutomovilSoapWS/AutomovilWS?xsd=1" uri="src/conf/xml-resources/web-service-references/AutomovilWS/wsdl/localhost_8080/AutomovilSoapWS/AutomovilWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ResporteWS/ResporteWS?WSDL" uri="src/conf/xml-resources/web-service-references/ResporteWS/wsdl/localhost_8080/ResporteWS/ResporteWS.wsdl"/>
+    <system systemId="http://localhost:8080/ResporteWS/ResporteWS?wsdl" uri="src/conf/xml-resources/web-service-references/ResporteWS/wsdl/localhost_8080/ResporteWS/ResporteWS.wsdl"/>
+    <system systemId="http://localhost:8080/ResporteWS/ResporteWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ResporteWS/wsdl/localhost_8080/ResporteWS/ResporteWS.xsd_1.xsd"/>
+</catalog>

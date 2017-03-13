@@ -1,0 +1,133 @@
+DROP TABLE IF EXISTS detalleVehiculo;
+DROP TABLE IF EXISTS vehiculo;
+
+CREATE TABLE vehiculo(
+	
+idVehiculo int(11) not null AUTO_INCREMENT,
+
+	modelo varchar(100),
+
+	marca varchar(100),
+
+	serie varchar(100),
+ 
+	
+   PRIMARY KEY (idVehiculo)
+);
+
+
+-- Crear la tabla caracteristicas
+
+DROP TABLE IF EXISTS caracteristicas;
+
+CREATE TABLE caracteristicas(
+	
+idCaracteristicas int(11) not null AUTO_INCREMENT,
+
+    version varchar(100),
+
+    combustible varchar(100),
+
+    potencimax int(11),
+ 
+   nocilindros int(11),
+
+    traccion varchar(100),
+ 
+   cajacambios int(11),
+ 
+   nopuertas int(11),
+ 
+   volumenmaletero int(11),
+ 
+   capdeposito int(11),
+
+    aceleracion int(11),
+ 
+   velmax int(11),
+ 
+   consumou int(11),
+ 
+   consumom int(11),
+   
+ consumeex int(11),
+  
+  consumem int(11),
+  
+  emisionesco2 int(11),
+ 
+   PRIMARY KEY (idCaracteristicas)
+);
+
+
+-- Crear tabla detalleVehiculo
+
+DROP TABLE IF EXISTS detalleVehiculo;
+
+CREATE TABLE detalleVehiculo(
+	
+idDetalleVehiculo int(11) not null AUTO_INCREMENT,
+
+	codigoVehiculo int (11) not null,
+
+	codigoCaracteristicas int(11) not null,
+
+    PRIMARY KEY (idDetalleVehiculo,codigoVehiculo,codigoCaracteristicas),
+
+    FOREIGN KEY (codigoCaracteristicas) REFERENCES caracteristicas(idCaracteristicas),
+
+    FOREIGN KEY (codigoVehiculo) REFERENCES vehiculo(idVehiculo)
+);
+
+create table calificacion(
+	idClasificacion int(11) not null auto_increment,
+    idVehiculo int(11) not null,
+    idUsuario varchar(11) not null,
+    idComparacion int(11) not null,
+    comparacion int(11),
+    primary key (idClasificacion)    
+);
+
+DELIMITER //
+CREATE PROCEDURE guardar(IN modelo varchar(11) , IN marca varchar(11) , IN serie varchar(11))
+BEGIN
+    insert into vehiculo (idVehiculo,modelo,marca,serie) values(null,modelo,marca,serie);
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE actualizar(In id Int ,IN modelonow varchar(11) , IN marcanow varchar(11) , IN serienow varchar(11))
+BEGIN
+    Update vehiculo set modelo = modelonow , marca = marcanow , serie = serienow where idVehiculo = id ;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE borrar(In id Int , In tipo Int)
+BEGIN
+    if tipo = 1 then
+		Delete from vehiculo where idVehiculo = id;
+    end if;
+    if tipo = 2 then
+		Delete from caracteristicas where idCaracteristicas = id;
+    end if;
+    if tipo = 3 then
+		Delete from detalleVehiculo where idDetalleVehiculo = id;
+    end if;
+    
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE guardarActualizarCarateristica(in opc int , in id int,in version varchar(100), in combustible  varchar(100), in potencimax int, in nocilindros int, in traccion  varchar(100), in cajacambios int, in nopuertas int, in volumenmaletero int, in capdeposito int , in aceleracion int , in velmax int , in consumou int, in consumom int , in consumeex int, in consumem int, in emisionesco2 int)
+BEGIN
+if opc=1 then
+    INSERT INTO `caracteristicas`(`idCaracteristicas`, `version`, `combustible`, `potencimax`, `nocilindros`, `traccion`, `cajacambios`, `nopuertas`, `volumenmaletero`, `capdeposito`, `aceleracion`, `velmax`, `consumou`, `consumom`, `consumeex`, `consumem`, `emisionesco2`) VALUES (null,version ,  combustible ,potencimax , tnocilindros, traccion ,  cajacambios , nopuertas,  volumenmaletero,capdeposito ,aceleracion,velmax,consumou,consumom,consumeex,consumem ,emisionesco2);
+end if;
+if opc = 2 then
+	UPDATE `caracteristicas` SET `idCaracteristicas`=id,`version`=version,`combustible`=combustible,`potencimax`=potencimax,`nocilindros`=nocilindros,`traccion`=traccion,`cajacambios`=cajacambios,`nopuertas`=nopuertas,`volumenmaletero`=volumenmaletero,`capdeposito`=capdeposito,`aceleracion`=aceleracion,`velmax`=velmax,`consumou`=consumou,`consumom`=consumom,`consumeex`=consumeex,`consumem`=consumem,`emisionesco2`=emisionesco2 WHERE `idCaracteristicas`=id;
+end if;
+END//
+DELIMITER ;
+
+
